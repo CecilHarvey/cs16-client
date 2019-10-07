@@ -191,8 +191,11 @@ void CHudRadar::Shutdown( void )
 
 int CHudRadar::VidInit(void)
 {
+#if 0
 	bUseRenderAPI = g_iXash && InitBuiltinTextures();
-
+#else
+	bUseRenderAPI = false;
+#endif
 	m_hRadar.SetSpriteByName( "radar" );
 	m_hRadarOpaque.SetSpriteByName( "radaropaque" );
 	iMaxRadius = (m_hRadar.rect.right - m_hRadar.rect.left) / 2.0f;
