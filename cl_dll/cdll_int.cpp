@@ -57,7 +57,7 @@ int DLLEXPORT Initialize( cl_enginefunc_t *pEnginefuncs, int iVersion )
 
 	gEngfuncs = *pEnginefuncs;
 
-	g_iXash = (int)CVAR_GET_FLOAT("build");
+	g_iXash = (int)CVAR_GET_FLOAT("buildnum");
 
 	Game_HookEvents();
 
