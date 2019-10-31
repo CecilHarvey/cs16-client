@@ -26,24 +26,21 @@ project (CLDLL)
 # set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 if (APPLE)
 set (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra -Wpedantic -Wno-unused-parameter -ggdb")
+elseif (WIN32)
+set (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS}")
 else()
 set (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wl,--no-undefined -ggdb")
 endif()
+if (NOT WIN32)
 set (CMAKE_C_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
 set (CMAKE_C_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}  -O3")
 set (CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} -Os")
 set (CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -ggdb -O3")
-
 if (APPLE)
 set (CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++11 -stdlib=libc++")
 else()
 set (CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++11 -static-libstdc++")
 endif()
-set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ")
-set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
-set (CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} ")
-set (CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ")
-
 # force build 32bit libraries
 if(CMAKE_SIZEOF_VOID_P MATCHES "8")
     if(APPLE)
@@ -53,6 +50,12 @@ if(CMAKE_SIZEOF_VOID_P MATCHES "8")
         SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
     endif()
 endif()
+endif()
+
+set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ")
+set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
+set (CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} ")
+set (CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ")
 
 #find_package(SDL2 REQUIRED)
 
@@ -243,10 +246,14 @@ include_directories (
 	../public/
 	${SDL2_INCLUDE_DIR})
 add_library (${CLDLL_LIBRARY} SHARED ${CLDLL_SOURCES})
-add_definitions( -D_CS16CLIENT_ENABLE_GSRC_SUPPORT
-	-DLINUX -D_LINUX -DCLIENT_WEAPONS -DCLIENT_DLL
-	-D_DEBUG  -D_CS16CLIENT_ALLOW_SPECIAL_SCRIPTING
+add_definitions( -D_CS16CLIENT_ENABLE_GSRC_SUPPORT -DCLIENT_WEAPONS -DCLIENT_DLL
+    -D_CS16CLIENT_ALLOW_SPECIAL_SCRIPTING )
+
+if (NOT WIN32)
+add_definitions(
+	-DLINUX -D_LINUX -D_DEBUG
 	-Dstricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp )
+endif()
 
 target_link_libraries( ${CLDLL_LIBRARY} ${CMAKE_DL_LIBS} ${SDL2_LIBRARY} )
 

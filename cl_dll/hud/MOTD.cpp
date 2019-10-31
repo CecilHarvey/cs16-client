@@ -27,6 +27,31 @@
 #include <stdio.h>
 #include "draw_util.h"
 
+#ifdef _WIN32
+char *strcasestr( const char *str, const char *pattern )
+{
+	size_t i;
+
+	if ( !*pattern )
+		return (char *)str;
+
+	for ( ; *str; str++ )
+	{
+		if ( toupper( *str ) == toupper( *pattern ) )
+		{
+			for ( i = 1;; i++ )
+			{
+				if ( !pattern[i] )
+					return (char *)str;
+				if ( toupper( str[i] ) != toupper( pattern[i] ) )
+					break;
+			}
+		}
+	}
+	return NULL;
+}
+#endif
+
 DECLARE_MESSAGE( m_MOTD, MOTD )
 
 int CHudMOTD :: Init( void )

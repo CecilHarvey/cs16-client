@@ -32,7 +32,12 @@ extern "C" {
 // this file is included by both the engine and the client-dll,
 // so make sure engine declarations aren't done twice
 
+#ifdef _WIN32
+#include <windows.h>
+#define HSPRITE int
+#else
 typedef int HSPRITE;	// handle to a graphic
+#endif
 
 #define SCRINFO_SCREENFLASH 1
 #define SCRINFO_STRETCHED	2

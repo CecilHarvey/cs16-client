@@ -31,6 +31,10 @@
 #ifdef _WIN32
 #pragma once
 #endif
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #define PITCH	0	// up/down
 #define YAW	1	// left/right
@@ -68,5 +72,9 @@ void  VectorScale(const vec_t *in, vec_t scale, vec_t *out);
 int   Q_log2(int val);
 void  VectorMatrix(vec_t *forward, vec_t *right, vec_t *up);
 void  VectorAngles(const vec_t *forward, vec_t *angles);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // PM_MATH_H
