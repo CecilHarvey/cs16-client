@@ -31,6 +31,7 @@
 #include <string.h>
 #include "wrect.h" // need for cl_dll.h
 #include "cl_dll.h"
+#include "cl_util.h"
 #include "vgui_parser.h"
 #include "unicode_strtools.h"
 

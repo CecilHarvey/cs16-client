@@ -409,18 +409,16 @@ void EV_HugWalls(TEMPENTITY *te, pmtrace_s *ptr)
 	Vector norm = te->entity.baseline.origin.Normalize();
 	float len = te->entity.baseline.origin.Length();
 
-	Vector v =
-	{
+	Vector v(
 		ptr->plane.normal.y * norm.x - norm.y * ptr->plane.normal.x,
 		ptr->plane.normal.x * norm.z - norm.x * ptr->plane.normal.z,
 		ptr->plane.normal.z * norm.y - norm.z * ptr->plane.normal.y
-	};
-	Vector v2 =
-	{
+	);
+	Vector v2(
 		ptr->plane.normal.y * v.z - v.y * ptr->plane.normal.x,
 		ptr->plane.normal.x * v.x - v.z * ptr->plane.normal.z,
 		ptr->plane.normal.z * v.y - v.x * ptr->plane.normal.y
-	};
+	);
 
 	if( len <= 2000.0f )
 		len *= 1.5;

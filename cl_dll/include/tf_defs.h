@@ -10,6 +10,10 @@
 
 #ifndef __TF_DEFS_H
 #define __TF_DEFS_H
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 //===========================================================================
 // OLD OPTIONS.QC
@@ -1384,6 +1388,9 @@ public:
 };
 
 #endif // TF_DEFS_ONLY
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif // __TF_DEFS_H
-
-

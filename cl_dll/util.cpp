@@ -146,11 +146,11 @@ wrect_t HUD_GetSpriteRect( int index )
 	return gHUD.GetSpriteRect( index );
 }
 
-vec3_t g_ColorBlue	= { 0.6, 0.8, 1.0 };
-vec3_t g_ColorRed		= { 1.0, 0.25, 0.25 };
-vec3_t g_ColorGreen	= { 0.6, 1.0, 0.6 };
-vec3_t g_ColorYellow	= { 1.0, 0.7, 0.0 };
-vec3_t g_ColorGrey	= { 0.8, 0.8, 0.8 };
+float g_ColorBlue[]	= { 0.6, 0.8, 1.0 };
+float g_ColorRed[]		= { 1.0, 0.25, 0.25 };
+float g_ColorGreen[]	= { 0.6, 1.0, 0.6 };
+float g_ColorYellow[]	= { 1.0, 0.7, 0.0 };
+float g_ColorGrey[]	= { 0.8, 0.8, 0.8 };
 
 float *GetClientColor( int clientIndex )
 {

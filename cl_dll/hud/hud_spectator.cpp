@@ -1148,7 +1148,7 @@ void CHudSpectator::DrawOverviewLayer()
 	if ( m_MapSprite )
 	{
 		i = m_MapSprite->numframes / (4*3);
-		i = sqrt(i);
+		i = sqrt((double)i);
 		xTiles = i*4;
 		yTiles = i*3;
 	}
