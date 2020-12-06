@@ -231,8 +231,8 @@ typedef struct model_s
 
 	modtype_t	type;
 	int			numframes;
-	synctype_t	synctype;
-	
+	byte		*mempool;
+
 	int			flags;
 
 //
